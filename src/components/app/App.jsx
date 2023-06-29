@@ -8,10 +8,14 @@ import defaultContacts from '../../data/contacts.json';
 
 export const App = () => {
   const localStorageKey = 'contacts';
-  const [contacts, setContacts] = useState(() => {
+  useEffect(() => {
     const savedContacts = localStorage.getItem(localStorageKey);
-    return savedContacts ? JSON.parse(savedContacts) : defaultContacts;
-  });
+    if (savedContacts) {
+      setContacts(JSON.parse(savedContacts));
+    } else {
+      setContacts(defaultContacts);
+    }
+  }, []);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -63,8 +67,6 @@ export const App = () => {
   );
 };
 
-
-
 // import React, { useState, useEffect } from 'react';
 // import { Frame, Container, Title, SubTitle } from './App.styled';
 // import { ContactForm } from 'components/contactForm';
@@ -73,15 +75,12 @@ export const App = () => {
 // import { nanoid } from 'nanoid';
 // import defaultContacts from '../../data/contacts.json';
 
-
 // export const App = () => {
 // const [contacts, setContacts] = useState(defaultContacts);
 // const [filter, setFilter] = useState('');
 // const localStorageKey = 'contacts';
 
 // const savedContacts = localStorage.getItem(localStorageKey);
-
-
 
 // useEffect(() => {
 // if (savedContacts) {
