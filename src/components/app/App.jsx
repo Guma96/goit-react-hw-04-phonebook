@@ -23,6 +23,8 @@ export const App = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(contacts));
   }, [contacts]);
 
+  const [filter, setFilter] = useState('');
+
   const onSubmitHandler = newContact => {
     const isDuplicateName = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
